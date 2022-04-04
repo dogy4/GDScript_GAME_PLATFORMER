@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://viking/viking2.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Hero.gd" type="Script" id=2]
+[ext_resource path="res://scripts/World.gd" type="Script" id=3]
+[ext_resource path="res://viking/HealthUI.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Enemy_wizzard.tscn" type="PackedScene" id=5]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 9.0
+height = 0.0
+
+[node name="World" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Hero" type="KinematicBody2D" parent="."]
+position = Vector2( 194, 89 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Hero"]
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hero"]
+position = Vector2( 1, 7 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="Hero"]
+
+[node name="H1" type="Area2D" parent="."]
+position = Vector2( 28, 22 )
+
+[node name="sprite" type="Sprite" parent="H1"]
+position = Vector2( 64, -7 )
+scale = Vector2( 4.13636, 3.46488 )
+texture = ExtResource( 4 )
+offset = Vector2( -15.4725, 2.76446 )
+hframes = 3
+vframes = 7
+
+[node name="H2" type="Area2D" parent="."]
+position = Vector2( 88, 23 )
+
+[node name="sprite" type="Sprite" parent="H2"]
+position = Vector2( 64, -8 )
+scale = Vector2( 4.13636, 3.46488 )
+texture = ExtResource( 4 )
+offset = Vector2( -15.4725, 2.76446 )
+hframes = 3
+vframes = 7
+
+[node name="H3" type="Area2D" parent="."]
+position = Vector2( 145, 23 )
+
+[node name="sprite" type="Sprite" parent="H3"]
+position = Vector2( 63, -8 )
+scale = Vector2( 4.13636, 3.46488 )
+texture = ExtResource( 4 )
+offset = Vector2( -15.4725, 2.76446 )
+hframes = 3
+vframes = 7
+
+[node name="Enemy_wizzard" parent="." instance=ExtResource( 5 )]
+position = Vector2( 633, 109 )
+scale = Vector2( 0.979853, 1 )
+
+[connection signal="InflDamage" from="Hero" to="Enemy_wizzard" method="_on_Hero_InflDamage"]
